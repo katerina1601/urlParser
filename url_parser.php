@@ -1,3 +1,5 @@
+<?php
+
 function urlParser ($url) {
     $urlObj = parse_url($url); // url string to array
 
@@ -26,6 +28,11 @@ function urlParser ($url) {
 
     if ($urlObj['path']) {
         $parsedData['path'] = $urlObj['path'];
+
+        $pathObj = explode('.', $urlObj['path']);
+        if (count($pathObj)) {
+            $parsedData['extension'] = end($pathObj);
+        }
     }
 
     if ($urlObj['query']) {
